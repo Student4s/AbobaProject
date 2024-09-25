@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KriegScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+   public float aboba;
     void Start()
     {
         
