@@ -18,6 +18,7 @@ public class StartMenuController : MonoBehaviour
     
     void Start()
     {
+        sceneController = GetComponent<SceneController>();
     }
 
     // Update is called once per frame
