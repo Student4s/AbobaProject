@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KriegScript : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-   public float aboba;
+    // Start is called before the first frame update
     void Start()
     {
         
