@@ -16,6 +16,14 @@ public class PlayerMoveComponent : MonoBehaviour
 
     private Vector2 direction;
 
+    private void OnEnable()
+    {
+        Crutch.Change += ChangeTurn;
+    }
+    private void OnDisable()
+    {
+        Crutch.Change -= ChangeTurn;
+    }
     void Update()
     {
         if(isMove)
@@ -46,6 +54,32 @@ public class PlayerMoveComponent : MonoBehaviour
             }
         }
     }
+    public void MoveBot()
+    {
+        if (!bot.isTouch)
+        {
+            if (!isEnemyTurn)
+            {
+                isMove = true;
+                direction = Vector2.down;
+            }
+        }
+    }
+    public void MoveRight()
+    {
+        if (!right.isTouch)
+        {
+            if (!isEnemyTurn)
+            {
+                isMove = true;
+                direction = Vector2.right;
+            }
+        }
+    }
 
+    public void ChangeTurn()
+    {
+        isEnemyTurn = false;
+    }
 
 }
