@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerCrutch : MonoBehaviour
 {
+    public bool isActive = false;
     public bool isTouch;
     [SerializeField] private PlayerMoveComponent player;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(isActive){
         if(collision.CompareTag("Wall"))
         {
             player.isMove = false;
@@ -30,11 +32,13 @@ public class PlayerCrutch : MonoBehaviour
                 Destroy(player.gameObject);
             }
         }
+        isActive = false;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Wall"))
+        if (collision.CompareTag("Wall") )
         {
             isTouch = false;
         }

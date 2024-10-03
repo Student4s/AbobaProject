@@ -7,7 +7,7 @@ public class PlayerMoveComponent : MonoBehaviour
     [SerializeField] private float moveSpeed = 2f;
     public bool isEnemyTurn;
     public bool isMove;
-
+    [SerializeField] public bool isTurnBased = false;
 
     [SerializeField] private PlayerCrutch top;
     [SerializeField] private PlayerCrutch bot;
@@ -26,31 +26,58 @@ public class PlayerMoveComponent : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            MoveTop();
+        }
+
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            MoveBot();
+        }
+
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            MoveLeft();
+        }
+
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Debug.Log("aboba");
+            MoveRight();
+        }
+
         if(isMove)
         {
             transform.Translate(direction * moveSpeed * Time.deltaTime);
         }
+
+
     }
 
     public void MoveTop()
     {
         if(!top.isTouch)
         {
-            if(!isEnemyTurn)
+            if(!isEnemyTurn || !isTurnBased)
             {
+                top.isActive = true;
                 isMove = true;
                 direction = -Vector2.down;
+                Debug.Log("Move T");
             }
         }
     }
-    public void Moveleft()
+    public void MoveLeft()
     {
         if (!left.isTouch)
         {
-            if (!isEnemyTurn)
+            if (!isEnemyTurn || !isTurnBased)
             {
+                left.isActive = true;
                 isMove = true;
                 direction = Vector2.left;
+                Debug.Log("Move L");
             }
         }
     }
@@ -58,10 +85,12 @@ public class PlayerMoveComponent : MonoBehaviour
     {
         if (!bot.isTouch)
         {
-            if (!isEnemyTurn)
+            if (!isEnemyTurn || !isTurnBased)
             {
+                bot.isActive = true;
                 isMove = true;
                 direction = Vector2.down;
+                Debug.Log("Move B");
             }
         }
     }
@@ -69,10 +98,12 @@ public class PlayerMoveComponent : MonoBehaviour
     {
         if (!right.isTouch)
         {
-            if (!isEnemyTurn)
+            if (!isEnemyTurn || !isTurnBased)
             {
+                right.isActive = true;
                 isMove = true;
                 direction = Vector2.right;
+                Debug.Log("Move R");
             }
         }
     }
