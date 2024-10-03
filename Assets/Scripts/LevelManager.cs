@@ -28,8 +28,9 @@ public class LevelManager : MonoBehaviour
             levels[currentLevel].Restart();
         }
 
-        if(levels[currentLevel].enemiesNum == 0){
+        if(levels[currentLevel].enemiesNum == 0 && currentLevel + 1 < levels.Length){
             currentLevel += 1;
+            Debug.Log(currentLevel);
             playerMov.startPos = levels[currentLevel].spawnPos.transform.position; // SHUE
         
             playerMov.Restart();
