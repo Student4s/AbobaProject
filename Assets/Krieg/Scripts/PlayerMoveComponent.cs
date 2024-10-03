@@ -14,7 +14,17 @@ public class PlayerMoveComponent : MonoBehaviour
     [SerializeField] private PlayerCrutch right;
     [SerializeField] private PlayerCrutch left;
 
+    public Vector3 startPos;
+
     private Vector2 direction;
+
+    void Start(){
+        startPos = transform.position;
+    }
+
+    public void Restart(){
+        transform.position = startPos;
+    }
 
     private void OnEnable()
     {
