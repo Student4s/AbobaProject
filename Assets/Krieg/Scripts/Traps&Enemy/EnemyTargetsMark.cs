@@ -5,15 +5,16 @@ using UnityEngine;
 public class EnemyTargetsMark : MonoBehaviour
 {
     [SerializeField] private Enemy enemy;
-    private bool canAttack;
+    [SerializeField] private bool canAttack;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.GetComponent<PlayerMoveComponent>() != null)
         {
             canAttack = true;
             if (TurnChanger.isEnemyTurn && canAttack)
             {
+                Debug.Log("2");
                 enemy.AttackPlayer();
             }
         }

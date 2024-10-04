@@ -5337,7 +5337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e4ee8e06e2d16d47a4e4f632cfc52e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenTurns: 1
+  timeBetweenTurns: 1.5
   currentTimeBetweenTurns: 0
   image: {fileID: 845162219}
 --- !u!1001 &1079177450856813892
@@ -5407,11 +5407,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 992553259992748190, guid: 41f2dcd061d2b904794dafa40ab874cd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.5
+      value: -8.44
       objectReference: {fileID: 0}
     - target: {fileID: 992553259992748190, guid: 41f2dcd061d2b904794dafa40ab874cd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.53
+      value: 1.51
       objectReference: {fileID: 0}
     - target: {fileID: 992553259992748190, guid: 41f2dcd061d2b904794dafa40ab874cd, type: 3}
       propertyPath: m_LocalPosition.z

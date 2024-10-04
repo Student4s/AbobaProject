@@ -14,10 +14,8 @@ public class Trap : MonoBehaviour
     {
         if(collision.gameObject.name == "Player")
         {
-            if (TurnChanger.isEnemyTurn)
-            {
-                ActivateTrap();
-            }
+            //Debug.Log("aboba");
+            ActivateTrap();
         }
         
 

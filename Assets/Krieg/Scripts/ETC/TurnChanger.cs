@@ -17,7 +17,7 @@ public class TurnChanger : MonoBehaviour
     {
         isEnemyTurn = false;
         player = GameObject.Find("Player");//Find by name
-        Debug.Log(player.name);
+        //Debug.Log(player.name);
     }
     private void Update()// delay between turns
     {

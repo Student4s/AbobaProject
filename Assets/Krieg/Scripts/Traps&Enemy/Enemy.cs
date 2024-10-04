@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
 
     public void AttackPlayer()
     {
+        Destroy(TurnChanger.player);
         Debug.Log("Im attack");
     }
 }
