@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R)){
             playerMov.Restart();
             levels[currentLevel].Restart();
+            playerMov.isMove = false;
         }
 
         if(levels[currentLevel].enemiesNum == 0 && currentLevel + 1 < levels.Length){

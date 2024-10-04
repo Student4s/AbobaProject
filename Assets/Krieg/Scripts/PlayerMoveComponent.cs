@@ -36,6 +36,7 @@ public class PlayerMoveComponent : MonoBehaviour
     }
     void Update()
     {
+        if(!isMove){
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             MoveTop();
@@ -56,9 +57,8 @@ public class PlayerMoveComponent : MonoBehaviour
             Debug.Log("aboba");
             MoveRight();
         }
-
-        if(isMove)
-        {
+        } 
+        else {
             transform.Translate(direction * moveSpeed * Time.deltaTime);
         }
 
