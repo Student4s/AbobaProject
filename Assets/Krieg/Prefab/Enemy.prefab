@@ -134,7 +134,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.48128495, y: 0.530687}
+  m_Size: {x: 0.5, y: 0.530687}
   m_EdgeRadius: 0
 --- !u!50 &4601732655299600695
 Rigidbody2D:
@@ -299,6 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 8806387135579115330}
+  canAttack: 0
 --- !u!1 &4423728416384438020
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,6 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 8806387135579115330}
+  canAttack: 0
 --- !u!1 &5827352259142259252
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,6 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 8806387135579115330}
+  canAttack: 0
 --- !u!1 &6800023377391545099
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,3 +659,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 8806387135579115330}
+  canAttack: 0
