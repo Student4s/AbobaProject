@@ -37,7 +37,7 @@ public class PlayerCrutch : MonoBehaviour// what player touch
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Wall") )
+        if (collision.CompareTag("Wall"))
         {
             isTouch = false;
         }
