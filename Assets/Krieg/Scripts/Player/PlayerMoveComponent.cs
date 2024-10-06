@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerMoveComponent : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 2f;
-    [SerializeField] public bool isTurnBased = false;
+    [SerializeField] public bool isTurnBased;
+    [SerializeField] private SceneController sctrl;
+
     public bool isMove;
 
     
@@ -28,10 +30,13 @@ public class PlayerMoveComponent : MonoBehaviour
 
     public void Restart(){
         transform.position = startPos;
+        isMove = false;
+        gameObject.SetActive(true);
     }
 
     void Start(){
         startPos = transform.position;
+        isTurnBased = sctrl.isTurnBased;
     }
 
     void Update()

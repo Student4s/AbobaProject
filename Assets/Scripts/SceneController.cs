@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     public static bool isMuted = false;
+    [SerializeField] public bool isTurnBased = true;
     [SerializeField] AudioSource audioSource;
     // Start is called before the first frame update
     void Start()

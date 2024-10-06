@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public void AttackPlayer()
     {
         Destroy(TurnChanger.player);
+//        TurnChanger.player.SetActive(false);
         Debug.Log("Im attack");
     }// Start is called before the first frame update
     void Start (){

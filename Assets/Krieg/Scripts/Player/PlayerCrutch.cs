@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCrutch : MonoBehaviour// what player touch
 {
-    public bool isActive = false;
+    public bool isActive;
     public bool isTouch;
     [SerializeField] private PlayerMoveComponent player;
 
@@ -14,6 +14,7 @@ public class PlayerCrutch : MonoBehaviour// what player touch
         if(collision.CompareTag("Wall"))
         {
             player.isMove = false;
+            isActive = false;
             TurnChanger.isEnemyTurn = true;
             isTouch = true;
         }
@@ -25,13 +26,13 @@ public class PlayerCrutch : MonoBehaviour// what player touch
                 collision.GetComponent<Enemy>().Die();
                 TurnChanger.isEnemyTurn = true;
                 player.isMove = false;
+                isActive = false;
             }
             else
             {
                 Destroy(player.gameObject);
             }
         }
-        isActive = false;
         }
     }
 
