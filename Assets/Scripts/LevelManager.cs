@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     {
 
         GameObject playerObj = GameObject.Find("SpawnPoint");
+
         //playerMov = GetComponent<PlayerMoveComponent>();
 
     }

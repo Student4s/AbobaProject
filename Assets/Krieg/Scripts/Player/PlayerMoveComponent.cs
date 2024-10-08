@@ -11,16 +11,18 @@ public class PlayerMoveComponent : MonoBehaviour
     public bool isMove;
 
     public enum InputMove {None, Up, Down, Left, Right};
-    public InputMove iMove;
+    public InputMove moveDir;
     public float currentTime = 0;
-    public float timeBuffer = 0.2f;
+    public float timeBuffer = 0.5f;
 
     [SerializeField] private PlayerCrutch top;
     [SerializeField] private PlayerCrutch bot;
     [SerializeField] private PlayerCrutch right;
     [SerializeField] private PlayerCrutch left;
 
-    private Vector2 direction;
+    public bool aTop, aBot, aLeft, aRight;
+
+    public Vector2 direction;
     public Vector3 startPos;
 
     private void OnEnable()
@@ -36,6 +38,7 @@ public class PlayerMoveComponent : MonoBehaviour
         transform.position = startPos;
         isMove = false;
         gameObject.SetActive(true);
+        moveDir = InputMove.None;
     }
 
     void Start(){
@@ -45,38 +48,39 @@ public class PlayerMoveComponent : MonoBehaviour
 
     void Update()
     {
+        aTop = top.isActive; aBot = bot.isActive; aLeft = left.isActive; aRight = right.isActive;
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            iMove = InputMove.Up;
+            moveDir = InputMove.Up;
             currentTime = 0;
             //MoveTop();
         }
 
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            iMove = InputMove.Down;
+            moveDir = InputMove.Down;
             currentTime = 0;
         }
 
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            iMove = InputMove.Left;
+            moveDir = InputMove.Left;
             currentTime = 0;
         }
 
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            iMove = InputMove.Right;
+            moveDir = InputMove.Right;
             currentTime = 0;
         }
 
         if((currentTime += Time.deltaTime) >= timeBuffer){
-            iMove = InputMove.None;
+            moveDir = InputMove.None;
             currentTime = 0;
         }
 
         if(!isMove){
-            switch(iMove){
+            switch(moveDir){
                 case InputMove.Up: MoveTop(); break;
                 case InputMove.Down: MoveBot(); break;
                 case InputMove.Left: MoveLeft(); break;
@@ -85,7 +89,6 @@ public class PlayerMoveComponent : MonoBehaviour
             }
         } else {
             transform.Translate(direction * moveSpeed * Time.deltaTime);
-            
         }
     }
 
@@ -153,6 +156,20 @@ public class PlayerMoveComponent : MonoBehaviour
     public void ChangeTurn()
     {
         SceneController.isEnemyTurn = false;
+    }
+
+    public void SnapToNearest(){
+        isMove = false;
+
+         Vector3 currentPosition = transform.position;
+
+        // Snap each axis to the nearest 0.5 value
+        float snappedX = Mathf.Round(currentPosition.x * 2) / 2;
+        float snappedY = Mathf.Round(currentPosition.y * 2) / 2;
+        float snappedZ = Mathf.Round(currentPosition.z * 2) / 2;
+
+        // Set the position of the GameObject
+        transform.position = new Vector3(snappedX, snappedY, snappedZ);
     }
 
 }

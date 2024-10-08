@@ -15,7 +15,7 @@ public class SceneController : MonoBehaviour
     public static bool isEnemyTurn;
     public static GameObject player;
 
-    [SerializeField] private float timeBetweenTurns = 0.2f;
+    [SerializeField] private float timeBetweenTurns = 0.5f;
     [SerializeField] private float currentTimeBetweenTurns = 0;
     [SerializeField] private Image image;
     // Start is called before the first frame update
@@ -59,6 +59,6 @@ public class SceneController : MonoBehaviour
             audioSource.volume = 1;
         }
     }
-
+ 
     public bool GetMuted(){ return isMuted; }
 }

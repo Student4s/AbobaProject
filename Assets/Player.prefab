@@ -92,7 +92,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.5}
+  m_Size: {x: 0.25, y: 0.25}
   m_EdgeRadius: 0
 --- !u!50 &2038942388254278401
 Rigidbody2D:
@@ -275,7 +275,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.1}
+  m_Size: {x: 0.25, y: 0.25}
   m_EdgeRadius: 0
 --- !u!1 &4323693137059266330
 GameObject:
@@ -396,7 +396,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.1}
+  m_Size: {x: 0.25, y: 0.25}
   m_EdgeRadius: 0
 --- !u!1 &5476335101404762953
 GameObject:
@@ -490,7 +490,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.5}
+  m_Size: {x: 0.25, y: 0.25}
   m_EdgeRadius: 0
 --- !u!50 &4737395701485533633
 Rigidbody2D:
@@ -692,11 +692,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  isEnemyTurn: 0
-  isMove: 0
   isTurnBased: 0
+  sctrl: {fileID: 0}
+  isMove: 0
+  moveDir: 0
+  currentTime: 0
+  timeBuffer: 0.2
   top: {fileID: 6463954217338650335}
   bot: {fileID: 316189740247584043}
   right: {fileID: 4502514039939197847}
   left: {fileID: 7505951451514099908}
+  aTop: 0
+  aBot: 0
+  aLeft: 0
+  aRight: 0
+  direction: {x: 0, y: 0}
   startPos: {x: 0, y: 0, z: 0}

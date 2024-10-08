@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class PlayerCrutch : MonoBehaviour// what player touch
 {
-    public bool isActive;
-    public bool isTouch;
+    public bool isActive = false;
+    public bool isTouch = false;
     [SerializeField] private PlayerMoveComponent player;
 
+    void Start(){
+        isActive = false;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(isActive){
         if(collision.CompareTag("Wall"))
         {
+            SceneController.isEnemyTurn = true;
             player.isMove = false;
             isActive = false;
-            SceneController.isEnemyTurn = true;
             isTouch = true;
+            player.moveDir = PlayerMoveComponent.InputMove.None;
+            player.SnapToNearest();
+            Debug.Log("Skolko raz ebal  mamu");
+
         }
         if(collision.GetComponent<Enemy>() != null)
         {
@@ -27,11 +34,12 @@ public class PlayerCrutch : MonoBehaviour// what player touch
                 SceneController.isEnemyTurn = true;
                 player.isMove = false;
                 isActive = false;
+            player.moveDir = PlayerMoveComponent.InputMove.None;
             }
-            else
-            {
-                Destroy(player.gameObject);
-            }
+            // else
+            // {
+            //     Destroy(player.gameObject);
+            // }
         }
         }
     }
@@ -40,6 +48,7 @@ public class PlayerCrutch : MonoBehaviour// what player touch
     {
         if (collision.CompareTag("Wall"))
         {
+
             isTouch = false;
         }
     }
