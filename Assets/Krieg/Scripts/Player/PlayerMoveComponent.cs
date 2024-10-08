@@ -10,7 +10,11 @@ public class PlayerMoveComponent : MonoBehaviour
 
     public bool isMove;
 
-    
+    public enum InputMove {None, Up, Down, Left, Right};
+    public InputMove iMove;
+    public float currentTime = 0;
+    public float timeBuffer = 0.2f;
+
     [SerializeField] private PlayerCrutch top;
     [SerializeField] private PlayerCrutch bot;
     [SerializeField] private PlayerCrutch right;
@@ -41,29 +45,47 @@ public class PlayerMoveComponent : MonoBehaviour
 
     void Update()
     {
-        if(!isMove){
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            MoveTop();
+            iMove = InputMove.Up;
+            currentTime = 0;
+            //MoveTop();
         }
 
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            MoveBot();
+            iMove = InputMove.Down;
+            currentTime = 0;
         }
 
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            MoveLeft();
+            iMove = InputMove.Left;
+            currentTime = 0;
         }
 
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            
-            MoveRight();
+            iMove = InputMove.Right;
+            currentTime = 0;
         }
+
+        if((currentTime += Time.deltaTime) >= timeBuffer){
+            iMove = InputMove.None;
+            currentTime = 0;
+        }
+
+        if(!isMove){
+            switch(iMove){
+                case InputMove.Up: MoveTop(); break;
+                case InputMove.Down: MoveBot(); break;
+                case InputMove.Left: MoveLeft(); break;
+                case InputMove.Right: MoveRight(); break;
+                case InputMove.None: break;
+            }
         } else {
             transform.Translate(direction * moveSpeed * Time.deltaTime);
+            
         }
     }
 
@@ -73,7 +95,7 @@ public class PlayerMoveComponent : MonoBehaviour
         {
             if (!top.isTouch)
             {
-                if (!TurnChanger.isEnemyTurn || !isTurnBased)
+                if (!SceneController.isEnemyTurn || !isTurnBased)
                 {
                     top.isActive = true;
                     isMove = true;
@@ -88,7 +110,7 @@ public class PlayerMoveComponent : MonoBehaviour
         {
             if (!left.isTouch)
             {
-                if (!TurnChanger.isEnemyTurn || !isTurnBased)
+                if (!SceneController.isEnemyTurn || !isTurnBased)
                 {
                     left.isActive = true;
                     isMove = true;
@@ -103,7 +125,7 @@ public class PlayerMoveComponent : MonoBehaviour
         {
             if (!bot.isTouch)
             {
-                if (!TurnChanger.isEnemyTurn || !isTurnBased)
+                if (!SceneController.isEnemyTurn || !isTurnBased)
                 {
                     bot.isActive = true;
                     isMove = true;
@@ -118,7 +140,7 @@ public class PlayerMoveComponent : MonoBehaviour
         {
             if (!right.isTouch)
             {
-                if (!TurnChanger.isEnemyTurn || !isTurnBased)
+                if (!SceneController.isEnemyTurn || !isTurnBased)
                 {
                     right.isActive = true;
                     isMove = true;
@@ -130,7 +152,7 @@ public class PlayerMoveComponent : MonoBehaviour
 
     public void ChangeTurn()
     {
-        TurnChanger.isEnemyTurn = false;
+        SceneController.isEnemyTurn = false;
     }
 
 }

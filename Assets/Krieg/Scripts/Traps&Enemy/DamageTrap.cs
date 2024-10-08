@@ -6,6 +6,9 @@ public class DamageTrap : Trap
 {
     public override void ActivateTrap()
     {
-        Destroy(TurnChanger.player);
+        //Destroy(TurnChanger.player);\
+
+        SceneController.player.SetActive(false);
     }
 }
+

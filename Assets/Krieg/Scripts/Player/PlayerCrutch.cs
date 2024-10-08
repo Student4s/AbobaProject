@@ -15,7 +15,7 @@ public class PlayerCrutch : MonoBehaviour// what player touch
         {
             player.isMove = false;
             isActive = false;
-            TurnChanger.isEnemyTurn = true;
+            SceneController.isEnemyTurn = true;
             isTouch = true;
         }
         if(collision.GetComponent<Enemy>() != null)
@@ -24,7 +24,7 @@ public class PlayerCrutch : MonoBehaviour// what player touch
             {
                 player.transform.position = collision.transform.position;
                 collision.GetComponent<Enemy>().Die();
-                TurnChanger.isEnemyTurn = true;
+                SceneController.isEnemyTurn = true;
                 player.isMove = false;
                 isActive = false;
             }

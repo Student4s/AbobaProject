@@ -12,7 +12,7 @@ public class EnemyTargetsMark : MonoBehaviour
         if(collision.GetComponent<PlayerMoveComponent>() != null)
         {
             canAttack = true;
-            if (TurnChanger.isEnemyTurn && canAttack)
+            if (SceneController.isEnemyTurn && canAttack)
             {
                 Debug.Log("2");
                 enemy.AttackPlayer();
