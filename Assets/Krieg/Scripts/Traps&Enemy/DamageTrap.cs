@@ -8,7 +8,6 @@ public class DamageTrap : Trap
     {
         //Destroy(TurnChanger.player);\
 
-        SceneController.player.SetActive(false);
     }
 }
 

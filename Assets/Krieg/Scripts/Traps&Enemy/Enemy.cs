@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
 
     public void AttackPlayer()
     {
+            // StartCoroutine(SceneController.FreezeGame());
 //        Destroy(TurnChanger.player);
         SceneController.player.SetActive(false);
         Debug.Log("Im attack");

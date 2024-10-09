@@ -14,10 +14,12 @@ public class SceneController : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     public static bool isEnemyTurn;
     public static GameObject player;
-
+    public static int turnCounter = 0;
     [SerializeField] private float timeBetweenTurns = 0.5f;
-    [SerializeField] private float currentTimeBetweenTurns = 0;
+    [SerializeField] public static float currentTimeBetweenTurns = 0;
     [SerializeField] private Image image;
+    [SerializeField] private AudioClip hitSound;
+    [SerializeField] private AudioClip wallBump;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,4 +63,27 @@ public class SceneController : MonoBehaviour
     }
  
     public bool GetMuted(){ return isMuted; }
+
+    public static IEnumerator FreezeGame(){
+        Time.timeScale = 0f;
+
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+
+
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        Time.timeScale = 1f;
+
+        Time.fixedDeltaTime = 0.02f;
+
+    }
+
+
+    public void PlayHitSound(){
+        audioSource.PlayOneShot(hitSound);
+    }
+
+    public void PlayWallBumpSound(){
+        audioSource.PlayOneShot(wallBump);
+    }
 }

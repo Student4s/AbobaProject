@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerMoveComponent : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float moveSpeed = 0f;
+    public float maxSpeed = 12f;
+    public float minSpeed = 4f;
+    public float acceleration = 6f;
     [SerializeField] public bool isTurnBased;
     [SerializeField] private SceneController sctrl;
 
@@ -13,7 +16,7 @@ public class PlayerMoveComponent : MonoBehaviour
     public enum InputMove {None, Up, Down, Left, Right};
     public InputMove moveDir;
     public float currentTime = 0;
-    public float timeBuffer = 0.5f;
+    public float timeBuffer = 0.4f;
 
     [SerializeField] private PlayerCrutch top;
     [SerializeField] private PlayerCrutch bot;
@@ -80,6 +83,7 @@ public class PlayerMoveComponent : MonoBehaviour
         }
 
         if(!isMove){
+            moveSpeed = minSpeed;
             switch(moveDir){
                 case InputMove.Up: MoveTop(); break;
                 case InputMove.Down: MoveBot(); break;
@@ -88,6 +92,9 @@ public class PlayerMoveComponent : MonoBehaviour
                 case InputMove.None: break;
             }
         } else {
+            moveSpeed += (maxSpeed - moveSpeed) * acceleration * Time.deltaTime;
+            moveSpeed = Mathf.Clamp(moveSpeed, 0f, maxSpeed);
+            Debug.Log(moveSpeed);
             transform.Translate(direction * moveSpeed * Time.deltaTime);
         }
     }

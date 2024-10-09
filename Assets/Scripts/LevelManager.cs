@@ -14,9 +14,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         GameObject playerObj = GameObject.Find("SpawnPoint");
-
         //playerMov = GetComponent<PlayerMoveComponent>();
 
     }
@@ -27,6 +25,7 @@ public class LevelManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R)){
             playerMov.Restart();
             levels[currentLevel].Restart();
+            SceneController.turnCounter = 0;
         }
 
         if(levels[currentLevel].enemiesNum == 0 && currentLevel + 1 < levels.Length){
@@ -39,7 +38,8 @@ public class LevelManager : MonoBehaviour
 
             Vector3 newCam = levels[currentLevel].transform.position;
             newCam.z = -10;
-            mainCamera.transform.position = newCam; 
+            mainCamera.transform.position = newCam;
+            SceneController.turnCounter = 0;
         }   
     }
 }
