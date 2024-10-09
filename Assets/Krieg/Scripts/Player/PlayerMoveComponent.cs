@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMoveComponent : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 0f;
-    public float maxSpeed = 12f;
+    public float maxSpeed = 24f;
     public float minSpeed = 4f;
     public float acceleration = 6f;
     [SerializeField] public bool isTurnBased;
@@ -13,17 +13,18 @@ public class PlayerMoveComponent : MonoBehaviour
 
     public bool isMove;
 
-    public enum InputMove {None, Up, Down, Left, Right};
+    public enum InputMove { None, Up, Down, Left, Right };
     public InputMove moveDir;
     public float currentTime = 0;
     public float timeBuffer = 0.4f;
+    int triggerCount = 0;
 
     [SerializeField] private PlayerCrutch top;
     [SerializeField] private PlayerCrutch bot;
     [SerializeField] private PlayerCrutch right;
     [SerializeField] private PlayerCrutch left;
 
-    public bool aTop, aBot, aLeft, aRight;
+    //public bool aTop, aBot, aLeft, aRight;
 
     public Vector2 direction;
     public Vector3 startPos;
@@ -37,21 +38,25 @@ public class PlayerMoveComponent : MonoBehaviour
         Crutch.Change -= ChangeTurn;
     }
 
-    public void Restart(){
+    public void Restart()
+    {
         transform.position = startPos;
         isMove = false;
         gameObject.SetActive(true);
         moveDir = InputMove.None;
+
+        top.isActive = bot.isActive = right.isActive = left.isActive = false;
     }
 
-    void Start(){
+    void Start()
+    {
         startPos = transform.position;
         isTurnBased = sctrl.isTurnBased;
     }
 
     void Update()
     {
-        aTop = top.isActive; aBot = bot.isActive; aLeft = left.isActive; aRight = right.isActive;
+        //aTop = top.isActive; aBot = bot.isActive; aLeft = left.isActive; aRight = right.isActive;
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             moveDir = InputMove.Up;
@@ -77,31 +82,72 @@ public class PlayerMoveComponent : MonoBehaviour
             currentTime = 0;
         }
 
-        if((currentTime += Time.deltaTime) >= timeBuffer){
+        if ((currentTime += Time.deltaTime) >= timeBuffer)
+        {
             moveDir = InputMove.None;
             currentTime = 0;
         }
 
-        if(!isMove){
+        if (!isMove)
+        {
             moveSpeed = minSpeed;
-            switch(moveDir){
+            switch (moveDir)
+            {
                 case InputMove.Up: MoveTop(); break;
                 case InputMove.Down: MoveBot(); break;
                 case InputMove.Left: MoveLeft(); break;
                 case InputMove.Right: MoveRight(); break;
                 case InputMove.None: break;
             }
-        } else {
+        }
+        else
+        {
             moveSpeed += (maxSpeed - moveSpeed) * acceleration * Time.deltaTime;
             moveSpeed = Mathf.Clamp(moveSpeed, 0f, maxSpeed);
-            Debug.Log(moveSpeed);
+            // Debug.Log(moveSpeed);
             transform.Translate(direction * moveSpeed * Time.deltaTime);
+        }
+
+        triggerCount = 0;
+
+        if (top.isTouch) triggerCount++;
+        if (bot.isTouch) triggerCount++;
+        if (left.isTouch) triggerCount++;
+        if (right.isTouch) triggerCount++;
+
+        // If three triggers are active, adjust the position
+        if (triggerCount >= 3)
+        {
+            Vector3 adjustment = Vector3.zero;
+
+            // Check which trigger is not active and adjust position accordingly
+            if (!top.isTouch)
+            {
+                adjustment = new Vector3(0, 0.5f, 0);  // Move up
+            }
+            else if (!bot.isTouch)
+            {
+                adjustment = new Vector3(0, -0.5f, 0); // Move down
+            }
+            else if (!left.isTouch)
+            {
+                adjustment = new Vector3(-0.5f, 0, 0); // Move left
+            }
+            else if (!right.isTouch)
+            {
+                adjustment = new Vector3(0.5f, 0, 0);  // Move right
+            }
+
+            // Apply the adjustment to the object position
+            transform.position += adjustment;
+
+            Debug.Log("fixed?");
         }
     }
 
     public void MoveTop()
     {
-        if(!isMove)
+        if (!isMove)
         {
             if (!top.isTouch)
             {
@@ -127,7 +173,7 @@ public class PlayerMoveComponent : MonoBehaviour
                     direction = Vector2.left;
                 }
             }
-        } 
+        }
     }
     public void MoveBot()
     {
@@ -165,10 +211,11 @@ public class PlayerMoveComponent : MonoBehaviour
         SceneController.isEnemyTurn = false;
     }
 
-    public void SnapToNearest(){
+    public void SnapToNearest()
+    {
         isMove = false;
 
-         Vector3 currentPosition = transform.position;
+        Vector3 currentPosition = transform.position;
 
         // Snap each axis to the nearest 0.5 value
         float snappedX = Mathf.Round(currentPosition.x * 2) / 2;
@@ -177,6 +224,10 @@ public class PlayerMoveComponent : MonoBehaviour
 
         // Set the position of the GameObject
         transform.position = new Vector3(snappedX, snappedY, snappedZ);
+
+        // Count how many triggers are active
+
+
     }
 
 }

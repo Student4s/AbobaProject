@@ -23,9 +23,12 @@ public class SceneController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(isMuted == true){
+        if (isMuted == true)
+        {
             audioSource.volume = 0;
-        } else {
+        }
+        else
+        {
             audioSource.volume = 1;
         }
 
@@ -35,12 +38,12 @@ public class SceneController : MonoBehaviour
     }
     private void Update()// delay between turns
     {
-        if(isEnemyTurn)
+        if (isEnemyTurn)
         {
- //           Debug.Log(Time.deltaTime);
+            //           Debug.Log(Time.deltaTime);
             currentTimeBetweenTurns += 10 * Time.deltaTime;
-//            image.fillAmount = currentTimeBetweenTurns/ timeBetweenTurns;
-            if(currentTimeBetweenTurns>= timeBetweenTurns)
+            //            image.fillAmount = currentTimeBetweenTurns/ timeBetweenTurns;
+            if (currentTimeBetweenTurns >= timeBetweenTurns)
             {
                 currentTimeBetweenTurns = 0;
                 isEnemyTurn = false;
@@ -49,22 +52,28 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    public void LoadScene(string sceneName){
+    public void LoadScene(string sceneName)
+    {
         SceneManager.LoadScene(sceneName);
     }
 
-    public void SetMuted(){
+    public void SetMuted()
+    {
         isMuted = !isMuted;
-        if(isMuted == true){
+        if (isMuted == true)
+        {
             audioSource.volume = 0;
-        } else {
+        }
+        else
+        {
             audioSource.volume = 1;
         }
     }
- 
-    public bool GetMuted(){ return isMuted; }
 
-    public static IEnumerator FreezeGame(){
+    public bool GetMuted() { return isMuted; }
+
+    public static IEnumerator FreezeGame()
+    {
         Time.timeScale = 0f;
 
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
@@ -79,11 +88,13 @@ public class SceneController : MonoBehaviour
     }
 
 
-    public void PlayHitSound(){
+    public void PlayHitSound()
+    {
         audioSource.PlayOneShot(hitSound);
     }
 
-    public void PlayWallBumpSound(){
+    public void PlayWallBumpSound()
+    {
         audioSource.PlayOneShot(wallBump);
     }
 }

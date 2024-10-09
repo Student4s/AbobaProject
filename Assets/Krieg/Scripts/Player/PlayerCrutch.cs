@@ -9,48 +9,51 @@ public class PlayerCrutch : MonoBehaviour// what player touch
     [SerializeField] private PlayerMoveComponent player;
     private SceneController sctrl;
 
-    void Start(){
+    void Start()
+    {
         isActive = false;
         GameObject targetObject = GameObject.Find("SceneController");
         sctrl = targetObject.GetComponent<SceneController>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!isActive && collision.CompareTag("Wall")){
-            isTouch = true;
-        } 
-        if(isActive){
-        if(collision.CompareTag("Wall"))
+        if (!isActive && collision.CompareTag("Wall"))
         {
-            SceneController.isEnemyTurn = true;
-            player.isMove = false;
-            isActive = false;
             isTouch = true;
-            // player.moveDir = PlayerMoveComponent.InputMove.None;
-            player.SnapToNearest();
-            //Debug.Log("Skolko raz ebal  mamu");
-            SceneController.turnCounter += 1;
-           sctrl.PlayWallBumpSound();
         }
-        if(collision.GetComponent<Enemy>() != null)
+        if (isActive)
         {
-            if (player.isMove)
+            if (collision.CompareTag("Wall"))
             {
-            // StartCoroutine(SceneController.FreezeGame());
-                sctrl.PlayHitSound();           
-                player.transform.position = collision.transform.position;
-                collision.GetComponent<Enemy>().Die();
                 SceneController.isEnemyTurn = true;
                 player.isMove = false;
                 isActive = false;
-            player.moveDir = PlayerMoveComponent.InputMove.None;
-            SceneController.turnCounter += 1;
+                isTouch = true;
+                // player.moveDir = PlayerMoveComponent.InputMove.None;
+                player.SnapToNearest();
+                //Debug.Log("Skolko raz ebal  mamu");
+                SceneController.turnCounter += 1;
+                sctrl.PlayWallBumpSound();
             }
-            // else
-            // {
-            //     Destroy(player.gameObject);
-            // }
-        }
+            if (collision.GetComponent<Enemy>() != null)
+            {
+                if (player.isMove)
+                {
+                    // StartCoroutine(SceneController.FreezeGame());
+                    sctrl.PlayHitSound();
+                    player.transform.position = collision.transform.position;
+                    collision.GetComponent<Enemy>().Die();
+                    SceneController.isEnemyTurn = true;
+                    player.isMove = false;
+                    isActive = false;
+                    player.moveDir = PlayerMoveComponent.InputMove.None;
+                    SceneController.turnCounter += 1;
+                }
+                // else
+                // {
+                //     Destroy(player.gameObject);
+                // }
+            }
         }
     }
 
