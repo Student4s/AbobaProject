@@ -29,7 +29,7 @@ public class PlayerCrutch : MonoBehaviour// what player touch
                 player.isMove = false;
                 isActive = false;
                 isTouch = true;
-                // player.moveDir = PlayerMoveComponent.InputMove.None;
+                player.moveDir = PlayerMoveComponent.InputMove.None;
                 player.SnapToNearest();
                 //Debug.Log("Skolko raz ebal  mamu");
                 SceneController.turnCounter += 1;

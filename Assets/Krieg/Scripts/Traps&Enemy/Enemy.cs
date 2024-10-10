@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public EnemyTargetsMark[] targets;
+    [SerializeField]    public EnemyTargetsMark top;
+    [SerializeField] public EnemyTargetsMark bot;
     private Vector3 startPos;
     private Level currentLevel;
     private SceneController sctrl;
     private PlayerMoveComponent playerMove;
+    public Animator animator;
+    private bool isAttacking = false;
+
+    
 
     public void Start()
     {
@@ -17,7 +22,15 @@ public class Enemy : MonoBehaviour
         GameObject targetObj = GameObject.Find("SceneController");
         sctrl = targetObj.GetComponent<SceneController>();
         targetObj = GameObject.Find("Player");
-            playerMove = targetObj.GetComponent<PlayerMoveComponent>();
+        playerMove = targetObj.GetComponent<PlayerMoveComponent>();
+
+        animator = GetComponent<Animator>();
+    }
+
+    public void Update(){
+        if (top.isTriggered == false && bot.isTriggered == false && !isAttacking){
+            animator.Play("idle");
+        }
     }
 
     public void AttackPlayer()
@@ -44,5 +57,48 @@ public class Enemy : MonoBehaviour
         transform.position = startPos;
         gameObject?.SetActive(true);
     }
+  public void AnimationAttack()
+    {
+        // isAttacking = true;
+        //animator.Play("attack_side");
+        if(top.isTriggered){
+            Debug.Log("top");
+        animator.Play("attack_top");
+        StartCoroutine(ResetAttack("attack_top"));
+        } else if (bot.isTriggered){
+            Debug.Log("bot");
+            animator.Play("attack_bot");
+            StartCoroutine(ResetAttack("attack_bot"));
+        }
+       
+       
+        // animator.SetTrigger("Attacking");
+    }
 
+    public IEnumerator ResetAttack(string name)
+    {
+        isAttacking = true;
+        // Get the animation state info for the base layer (index 0)
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        // Wait for the animation to finish
+        // Ensure you're waiting for the specific animation's length
+        while (!stateInfo.IsName(name))
+        {
+        // Debug.Log("biba egorov");
+            // Keep checking until the animation starts
+            stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            yield return null;
+        }
+
+        // Wait until the animation has finished
+        yield return new WaitForSeconds(stateInfo.length);
+        Debug.Log("aboba");
+
+
+        
+        //animator.SetBool("isAttacking", false);
+        isAttacking = false;
+        // Deactivate the GameObject after animation ends
+    }
 }

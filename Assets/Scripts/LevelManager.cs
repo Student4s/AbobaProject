@@ -10,13 +10,16 @@ public class LevelManager : MonoBehaviour
     //[SerializeField] GameObject playerObj;
     [SerializeField] PlayerMoveComponent playerMov;
     [SerializeField] Camera mainCamera;
+    
+    private GameObject titleOver;
 
     // Start is called before the first frame update
     void Start()
     {
         GameObject playerObj = GameObject.Find("SpawnPoint");
         //playerMov = GetComponent<PlayerMoveComponent>();
-
+        titleOver = GameObject.Find("GameOver");
+        titleOver.SetActive(false);
     }
 
     // Update is called once per frame
@@ -43,5 +46,9 @@ public class LevelManager : MonoBehaviour
             mainCamera.transform.position = newCam;
             SceneController.turnCounter = 0;
         }
+    }
+
+   public void SetOver(bool a){
+        titleOver.SetActive(a);
     }
 }

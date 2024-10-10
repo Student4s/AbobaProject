@@ -31,6 +31,7 @@ public class Level : MonoBehaviour
         foreach (Enemy enemy in enemies)
         {
             enemy.Restart();
+            enemy.animator.Play("idle");
         }
         enemiesNum = enemies.Length;
     }

@@ -6,6 +6,7 @@ public class EnemyTargetsMark : MonoBehaviour
 {
     [SerializeField] private Enemy enemy;
     [SerializeField] private bool canAttack;
+    public bool isTriggered ;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -14,16 +15,22 @@ public class EnemyTargetsMark : MonoBehaviour
             canAttack = true;
             if (SceneController.isEnemyTurn && canAttack)
             {
-                Debug.Log("2");
+                isTriggered = true;
+                enemy.AnimationAttack();
+                // Debug.Log("2");
                 enemy.AttackPlayer();
             }
         }
+
+
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerMoveComponent>() != null)
         {
+            isTriggered = false;
             canAttack = false;
         }
     }

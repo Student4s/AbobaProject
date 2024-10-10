@@ -11,7 +11,7 @@ public class PlayerMoveComponent : MonoBehaviour
     [SerializeField] public bool isTurnBased;
     [SerializeField] private SceneController sctrl;
     private BoxCollider2D collider2D;
-
+    private LevelManager lvlmng;
     private Coroutine deathCoroutine;
 
     public Animator animator;
@@ -60,6 +60,7 @@ public class PlayerMoveComponent : MonoBehaviour
 
         //        animator.SetBool("isDead", false);
         collider2D.enabled = true;
+        lvlmng.SetOver(false);
         //animator.Play("idle");
     }
 
@@ -70,6 +71,9 @@ public class PlayerMoveComponent : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider2D = GetComponent<BoxCollider2D>();
+        
+        GameObject target = GameObject.Find("LevelManager");
+        lvlmng = target.GetComponent<LevelManager>();
     }
 
     void Update()
@@ -377,6 +381,7 @@ public class PlayerMoveComponent : MonoBehaviour
         // Deactivate the GameObject after animation ends
         gameObject.SetActive(false);
         isDying = false;
+        lvlmng.SetOver(true);
     }
 
 }

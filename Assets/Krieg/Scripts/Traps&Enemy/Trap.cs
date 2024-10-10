@@ -30,12 +30,14 @@ public class Trap : MonoBehaviour
         if ((SceneController.turnCounter + offset) % 2 == 0 && currentState == TrapState.Disabled)
         {
             currentState = TrapState.Active;
-            rend.color = new Color(0, 0, 1, 1);
+            // rend.color = new Color(0, 0, 1, 1);
+        rend.sprite = sprites[1];
         }
         else if ((SceneController.turnCounter + offset) % 2 != 0 && currentState == TrapState.Active)
         {
             currentState = TrapState.Disabled;
-            rend.color = new Color(0, 0, 0.5f, 1);
+            // rend.color = new Color(0, 0, 0.5f, 1);
+        rend.sprite = sprites[0];
         }
     }
 
