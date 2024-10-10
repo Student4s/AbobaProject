@@ -1,0 +1,479 @@
+fileFormatVersion: 2
+guid: ddcabb8396dcfb10f973c843ae5f851b
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: attack sideways_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 99
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1027cf3cab049850185012f74c36a8d4
+      internalID: -1556527738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack sideways_1
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 99
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0c76cd6c9d650220996f755874b5fb4
+      internalID: 1290505330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack sideways_2
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 99
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4079d8514a17dec108ea672b2ca96c45
+      internalID: 626599250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack sideways_3
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 99
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e21a8d2da62d9a5091889d5b2018ed3
+      internalID: 1765649475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack sideways_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 66
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 520588047deb393f4b73c9a644b18871
+      internalID: 844094278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack sideways_5
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 66
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e863851989088b7b96b420f061c127a
+      internalID: -1671669698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack sideways_6
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 66
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4493be9a1b9a412968145574dc2a6dee
+      internalID: 24178966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack sideways_7
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 66
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a47870e1a1cf9692081ddd4cc53c64f9
+      internalID: 404770628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack sideways_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 33
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92a395db4b886bbd3911fc1f5907a385
+      internalID: 557083443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack sideways_9
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 33
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c186cc2dcf5a534cbf929ac3e0e7a14
+      internalID: -781144905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack sideways_10
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 33
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d9e77953017248c88a71769d503fa8e
+      internalID: -1423158371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack sideways_11
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 33
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec5407e0a67e165d4b269d8caee85695
+      internalID: 1246645266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack sideways_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3ee7b5d659173f06801efc0dadd9997
+      internalID: 1094630892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack sideways_13
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 0
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a215331c344f74a59e0df85294ce3fe
+      internalID: 125691310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack sideways_14
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 0
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae3452456f3b52a018d9c1ab404cf13a
+      internalID: -1927297467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: attack sideways_15
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 0
+        width: 73
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42, y: 0.42}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e99fb5dd0cb56cafc812864a1eeea09f
+      internalID: 353835131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 1e29a1efd51793d0d9f7a2921587b59e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      attack sideways_0: -1556527738
+      attack sideways_1: 1290505330
+      attack sideways_10: -1423158371
+      attack sideways_11: 1246645266
+      attack sideways_12: 1094630892
+      attack sideways_13: 125691310
+      attack sideways_14: -1927297467
+      attack sideways_15: 353835131
+      attack sideways_2: 626599250
+      attack sideways_3: 1765649475
+      attack sideways_4: 844094278
+      attack sideways_5: -1671669698
+      attack sideways_6: 24178966
+      attack sideways_7: 404770628
+      attack sideways_8: 557083443
+      attack sideways_9: -781144905
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -9,7 +9,7 @@ public class EnemyTargetsMark : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.GetComponent<PlayerMoveComponent>() != null)
+        if (collision.GetComponent<PlayerMoveComponent>() != null)
         {
             canAttack = true;
             if (SceneController.isEnemyTurn && canAttack)

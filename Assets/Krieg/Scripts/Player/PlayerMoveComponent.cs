@@ -10,8 +10,17 @@ public class PlayerMoveComponent : MonoBehaviour
     public float acceleration = 6f;
     [SerializeField] public bool isTurnBased;
     [SerializeField] private SceneController sctrl;
+    private BoxCollider2D collider2D;
+
+    private Coroutine deathCoroutine;
+
+    public Animator animator;
+    public SpriteRenderer spriteRenderer;
 
     public bool isMove;
+    public bool isAttacking = false;
+    public bool isIdle = false;
+    public bool isDying = false;
 
     public enum InputMove { None, Up, Down, Left, Right };
     public InputMove moveDir;
@@ -46,16 +55,24 @@ public class PlayerMoveComponent : MonoBehaviour
         moveDir = InputMove.None;
 
         top.isActive = bot.isActive = right.isActive = left.isActive = false;
+
+//        animator.SetBool("isDead", false);
+        collider2D.enabled = true;
+        //animator.Play("idle");
     }
 
     void Start()
     {
         startPos = transform.position;
         isTurnBased = sctrl.isTurnBased;
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        collider2D = GetComponent<BoxCollider2D>();
     }
 
     void Update()
     {
+        if(!isAttacking){
         //aTop = top.isActive; aBot = bot.isActive; aLeft = left.isActive; aRight = right.isActive;
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -90,6 +107,8 @@ public class PlayerMoveComponent : MonoBehaviour
 
         if (!isMove)
         {
+        animator.SetBool("isIdle", true);
+        animator.SetBool("isRolling", false);
             moveSpeed = minSpeed;
             switch (moveDir)
             {
@@ -102,10 +121,13 @@ public class PlayerMoveComponent : MonoBehaviour
         }
         else
         {
+        animator.SetBool("isRolling", true);
+
             moveSpeed += (maxSpeed - moveSpeed) * acceleration * Time.deltaTime;
             moveSpeed = Mathf.Clamp(moveSpeed, 0f, maxSpeed);
             // Debug.Log(moveSpeed);
             transform.Translate(direction * moveSpeed * Time.deltaTime);
+        }
         }
 
         triggerCount = 0;
@@ -153,6 +175,8 @@ public class PlayerMoveComponent : MonoBehaviour
             {
                 if (!SceneController.isEnemyTurn || !isTurnBased)
                 {
+                    animator.SetBool("directionUp", true);
+                    animator.SetBool("directionDown", false);
                     top.isActive = true;
                     isMove = true;
                     direction = -Vector2.down;
@@ -167,7 +191,9 @@ public class PlayerMoveComponent : MonoBehaviour
             if (!left.isTouch)
             {
                 if (!SceneController.isEnemyTurn || !isTurnBased)
-                {
+                {                    animator.SetBool("directionUp", false);
+                    animator.SetBool("directionDown", false);
+                    spriteRenderer.flipX = true;
                     left.isActive = true;
                     isMove = true;
                     direction = Vector2.left;
@@ -183,6 +209,8 @@ public class PlayerMoveComponent : MonoBehaviour
             {
                 if (!SceneController.isEnemyTurn || !isTurnBased)
                 {
+                    animator.SetBool("directionDown", true);
+                    animator.SetBool("directionUp", false);
                     bot.isActive = true;
                     isMove = true;
                     direction = Vector2.down;
@@ -198,6 +226,9 @@ public class PlayerMoveComponent : MonoBehaviour
             {
                 if (!SceneController.isEnemyTurn || !isTurnBased)
                 {
+                    animator.SetBool("directionUp", false);
+                    animator.SetBool("directionDown", false);
+                    spriteRenderer.flipX = false;
                     right.isActive = true;
                     isMove = true;
                     direction = Vector2.right;
@@ -228,6 +259,72 @@ public class PlayerMoveComponent : MonoBehaviour
         // Count how many triggers are active
 
 
+    }
+
+    public void AnimationAttack(){
+        isAttacking = true;
+        animator.SetBool("isRolling", false);
+        //animator.SetBool("isAttacking", true);
+        animator.SetTrigger("Attacking");
+        StartCoroutine(ResetAttack());
+    }
+
+    public IEnumerator ResetAttack()
+    {
+        // Get the animation state info for the base layer (index 0)
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        // Wait for the animation to finish
+        // Ensure you're waiting for the specific animation's length
+        while (!stateInfo.IsName("attack_side"))
+        {
+            // Keep checking until the animation starts
+            stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            yield return null;
+        }
+
+        // Wait until the animation has finished
+        yield return new WaitForSeconds(stateInfo.length);
+
+        //animator.SetBool("isAttacking", false);
+        isAttacking = false;
+        // Deactivate the GameObject after animation ends
+    }
+
+    public void AnimationDeath(){
+        collider2D.enabled = false;
+        isMove = false;
+        moveDir = InputMove.None;
+        // animator.SetBool("isDead", true);
+        animator.SetTrigger("Dying");
+        StartCoroutine(ResetDeath());
+        //gameObject.SetActive(false);
+
+/// Text
+
+    }   
+     public IEnumerator ResetDeath()
+    {
+        isDying = true;
+        // Get the animation state info for the base layer (index 0)
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        // Wait for the animation to finish
+        // Ensure you're waiting for the specific animation's length
+        while (!stateInfo.IsName("death"))
+        {
+            // Keep checking until the animation starts
+            stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            yield return null;
+        // animator.SetBool("isDead", false);
+        }
+
+        // Wait until the animation has finished
+        yield return new WaitForSeconds(stateInfo.length);
+
+        // Deactivate the GameObject after animation ends
+        gameObject.SetActive(false);
+        isDying = false;
     }
 
 }

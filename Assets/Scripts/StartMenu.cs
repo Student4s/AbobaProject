@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class StartMenuController : MonoBehaviour
 {
-    
+
     // [SerializeField] TextMeshProUGUI anyKeyText;
     [SerializeField] string nextScene;
     [SerializeField] TextMeshProUGUI playButtonText;
@@ -15,7 +15,7 @@ public class StartMenuController : MonoBehaviour
     // Start is called before the first frame update
 
 
-    
+
     void Start()
     {
         sceneController = GetComponent<SceneController>();
@@ -24,22 +24,27 @@ public class StartMenuController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    //    if (Input.anyKeyDown){
-    //     SceneManager.LoadScene(nextScene);
-    //    }
+        //    if (Input.anyKeyDown){
+        //     SceneManager.LoadScene(nextScene);
+        //    }
     }
 
-    public void OnSound(){
-        
+    public void OnSound()
+    {
+
         sceneController.SetMuted();
-        if (sceneController.GetMuted() == true){
+        if (sceneController.GetMuted() == true)
+        {
             soundButtonText.text = "Sound: Off";
-        } else {
+        }
+        else
+        {
             soundButtonText.text = "Sound: On";
         }
-    } 
+    }
 
-    public void OnPlay(){
+    public void OnPlay()
+    {
         SceneManager.LoadScene(nextScene);
     }
 

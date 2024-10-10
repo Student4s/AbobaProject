@@ -39,15 +39,17 @@ public class PlayerCrutch : MonoBehaviour// what player touch
             {
                 if (player.isMove)
                 {
-                    // StartCoroutine(SceneController.FreezeGame());
                     sctrl.PlayHitSound();
+                    player.AnimationAttack();
+                    // StartCoroutine(SceneController.FreezeGame());
                     player.transform.position = collision.transform.position;
                     collision.GetComponent<Enemy>().Die();
+                    //player.EndAnimationAttack();
                     SceneController.isEnemyTurn = true;
+                    SceneController.turnCounter += 1;
                     player.isMove = false;
                     isActive = false;
                     player.moveDir = PlayerMoveComponent.InputMove.None;
-                    SceneController.turnCounter += 1;
                 }
                 // else
                 // {

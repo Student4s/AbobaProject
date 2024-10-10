@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
- 
+
     public int currentLevel = 0;
     [SerializeField] public Level[] levels;
     //[SerializeField] GameObject playerObj;
     [SerializeField] PlayerMoveComponent playerMov;
     [SerializeField] Camera mainCamera;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,17 +22,19 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R)){
+        if (Input.GetKeyDown(KeyCode.R) && !playerMov.isDying)
+        {
             playerMov.Restart();
             levels[currentLevel].Restart();
             SceneController.turnCounter = 0;
         }
 
-        if(levels[currentLevel].enemiesNum == 0 && currentLevel + 1 < levels.Length){
+        if (levels[currentLevel].enemiesNum == 0 && currentLevel + 1 < levels.Length)
+        {
             currentLevel += 1;
             Debug.Log(currentLevel);
             playerMov.startPos = levels[currentLevel].spawnPos.transform.position; // SHUE
-        
+
             playerMov.Restart();
             levels[currentLevel].Restart();
 
@@ -40,6 +42,6 @@ public class LevelManager : MonoBehaviour
             newCam.z = -10;
             mainCamera.transform.position = newCam;
             SceneController.turnCounter = 0;
-        }   
+        }
     }
 }

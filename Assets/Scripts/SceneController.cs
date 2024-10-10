@@ -20,6 +20,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] private Image image;
     [SerializeField] private AudioClip hitSound;
     [SerializeField] private AudioClip wallBump;
+    [SerializeField] private AudioClip enemyAttack;
     // Start is called before the first frame update
     void Start()
     {
@@ -96,5 +97,9 @@ public class SceneController : MonoBehaviour
     public void PlayWallBumpSound()
     {
         audioSource.PlayOneShot(wallBump);
+    }
+    public void PlayEnemyAttack()
+    {
+        audioSource.PlayOneShot(enemyAttack);
     }
 }
