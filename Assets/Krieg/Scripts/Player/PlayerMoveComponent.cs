@@ -78,7 +78,7 @@ public class PlayerMoveComponent : MonoBehaviour
 
     void Update()
     {
-        if (!isAttacking)
+        if (!isAttacking && !isDying)
         {
             //aTop = top.isActive; aBot = bot.isActive; aLeft = left.isActive; aRight = right.isActive;
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
@@ -141,7 +141,7 @@ public class PlayerMoveComponent : MonoBehaviour
             }
             else
             {
-                animator.SetBool("isRolling", true);
+                // animator.SetBool("isRolling", true);
 
                 moveSpeed += (maxSpeed - moveSpeed) * acceleration * Time.deltaTime;
                 moveSpeed = Mathf.Clamp(moveSpeed, 0f, maxSpeed);
@@ -185,6 +185,8 @@ public class PlayerMoveComponent : MonoBehaviour
 
             Debug.Log("fixed?");
         }
+
+
     }
 
     public void MoveTop()

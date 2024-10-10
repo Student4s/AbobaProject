@@ -46,6 +46,8 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         // Destroy(gameObject);
+
+        AnimationDeath();
         gameObject?.SetActive(false);
         // ? is for null check
 
@@ -100,5 +102,41 @@ public class Enemy : MonoBehaviour
         //animator.SetBool("isAttacking", false);
         isAttacking = false;
         // Deactivate the GameObject after animation ends
+    }
+
+    public void AnimationDeath()
+    {
+
+        Debug.Log("mamu ebal");
+        animator.Play("pawn_death");
+        StartCoroutine(ResetDeath());
+        //gameObject.SetActive(false);
+
+        /// Text
+
+    }
+    public IEnumerator ResetDeath()
+    {
+        // isDying = true;
+        // Get the animation state info for the base layer (index 0)
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        // Wait for the animation to finish
+        // Ensure you're waiting for the specific animation's length
+        while (!stateInfo.IsName("death"))
+        {
+            // Keep checking until the animation starts
+            stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            yield return null;
+            // animator.SetBool("isDead", false);
+        }
+
+        // Wait until the animation has finished
+        yield return new WaitForSeconds(stateInfo.length);
+
+        // Deactivate the GameObject after animation ends
+        // gameObject.SetActive(false);
+        // isDying = false;
+        // lvlmng.SetOver(true);
     }
 }
