@@ -21,6 +21,8 @@ public class PlayerMoveComponent : MonoBehaviour
     public bool isAttacking = false;
     public bool isIdle = false;
     public bool isDying = false;
+    public bool facingUp = false;
+    public bool facingDown = false;
 
     public enum InputMove { None, Up, Down, Left, Right };
     public InputMove moveDir;
@@ -56,7 +58,7 @@ public class PlayerMoveComponent : MonoBehaviour
 
         top.isActive = bot.isActive = right.isActive = left.isActive = false;
 
-//        animator.SetBool("isDead", false);
+        //        animator.SetBool("isDead", false);
         collider2D.enabled = true;
         //animator.Play("idle");
     }
@@ -72,62 +74,76 @@ public class PlayerMoveComponent : MonoBehaviour
 
     void Update()
     {
-        if(!isAttacking){
-        //aTop = top.isActive; aBot = bot.isActive; aLeft = left.isActive; aRight = right.isActive;
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (!isAttacking)
         {
-            moveDir = InputMove.Up;
-            currentTime = 0;
-            //MoveTop();
-        }
-
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            moveDir = InputMove.Down;
-            currentTime = 0;
-        }
-
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            moveDir = InputMove.Left;
-            currentTime = 0;
-        }
-
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            moveDir = InputMove.Right;
-            currentTime = 0;
-        }
-
-        if ((currentTime += Time.deltaTime) >= timeBuffer)
-        {
-            moveDir = InputMove.None;
-            currentTime = 0;
-        }
-
-        if (!isMove)
-        {
-        animator.SetBool("isIdle", true);
-        animator.SetBool("isRolling", false);
-            moveSpeed = minSpeed;
-            switch (moveDir)
+            //aTop = top.isActive; aBot = bot.isActive; aLeft = left.isActive; aRight = right.isActive;
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
-                case InputMove.Up: MoveTop(); break;
-                case InputMove.Down: MoveBot(); break;
-                case InputMove.Left: MoveLeft(); break;
-                case InputMove.Right: MoveRight(); break;
-                case InputMove.None: break;
+                moveDir = InputMove.Up;
+                currentTime = 0;
+                //MoveTop();
             }
-        }
-        else
-        {
-        animator.SetBool("isRolling", true);
 
-            moveSpeed += (maxSpeed - moveSpeed) * acceleration * Time.deltaTime;
-            moveSpeed = Mathf.Clamp(moveSpeed, 0f, maxSpeed);
-            // Debug.Log(moveSpeed);
-            transform.Translate(direction * moveSpeed * Time.deltaTime);
-        }
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                moveDir = InputMove.Down;
+                currentTime = 0;
+            }
+
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                moveDir = InputMove.Left;
+                currentTime = 0;
+            }
+
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                moveDir = InputMove.Right;
+                currentTime = 0;
+            }
+
+            if ((currentTime += Time.deltaTime) >= timeBuffer)
+            {
+                moveDir = InputMove.None;
+                currentTime = 0;
+            }
+
+            if (!isMove)
+            {
+                if (!isDying)
+                {
+                    if (facingDown)
+                    {
+                        animator.Play("idle_down");
+                    }
+                    else if (facingUp)
+                    {
+                        animator.Play("idle_up");
+                    }
+                    else
+                    {
+                        animator.Play("idle");
+                    }
+                }
+                moveSpeed = minSpeed;
+                switch (moveDir)
+                {
+                    case InputMove.Up: MoveTop(); break;
+                    case InputMove.Down: MoveBot(); break;
+                    case InputMove.Left: MoveLeft(); break;
+                    case InputMove.Right: MoveRight(); break;
+                    case InputMove.None: break;
+                }
+            }
+            else
+            {
+                animator.SetBool("isRolling", true);
+
+                moveSpeed += (maxSpeed - moveSpeed) * acceleration * Time.deltaTime;
+                moveSpeed = Mathf.Clamp(moveSpeed, 0f, maxSpeed);
+                // Debug.Log(moveSpeed);
+                transform.Translate(direction * moveSpeed * Time.deltaTime);
+            }
         }
 
         triggerCount = 0;
@@ -175,8 +191,11 @@ public class PlayerMoveComponent : MonoBehaviour
             {
                 if (!SceneController.isEnemyTurn || !isTurnBased)
                 {
-                    animator.SetBool("directionUp", true);
-                    animator.SetBool("directionDown", false);
+                    facingDown = false;
+                    facingUp = true;
+                    animator.Play("move_up");
+
+                    //                    animator.SetBool("directionDown", false);
                     top.isActive = true;
                     isMove = true;
                     direction = -Vector2.down;
@@ -191,8 +210,12 @@ public class PlayerMoveComponent : MonoBehaviour
             if (!left.isTouch)
             {
                 if (!SceneController.isEnemyTurn || !isTurnBased)
-                {                    animator.SetBool("directionUp", false);
-                    animator.SetBool("directionDown", false);
+                {
+                    facingDown = false;
+                    facingUp = false;
+                    animator.Play("move");
+                    //animator.SetBool("directionUp", false);
+                    //animator.SetBool("directionDown", false);
                     spriteRenderer.flipX = true;
                     left.isActive = true;
                     isMove = true;
@@ -209,8 +232,12 @@ public class PlayerMoveComponent : MonoBehaviour
             {
                 if (!SceneController.isEnemyTurn || !isTurnBased)
                 {
-                    animator.SetBool("directionDown", true);
-                    animator.SetBool("directionUp", false);
+                    facingDown = true;
+                    facingUp = false;
+                    animator.Play("move_down");
+
+                    //animator.SetBool("directionDown", true);
+                    //animator.SetBool("directionUp", false);
                     bot.isActive = true;
                     isMove = true;
                     direction = Vector2.down;
@@ -226,8 +253,12 @@ public class PlayerMoveComponent : MonoBehaviour
             {
                 if (!SceneController.isEnemyTurn || !isTurnBased)
                 {
-                    animator.SetBool("directionUp", false);
-                    animator.SetBool("directionDown", false);
+                    facingDown = false;
+                    facingUp = false;
+                    animator.Play("move");
+
+                    //animator.SetBool("directionUp", false);
+                    //animator.SetBool("directionDown", false);
                     spriteRenderer.flipX = false;
                     right.isActive = true;
                     isMove = true;
@@ -261,23 +292,40 @@ public class PlayerMoveComponent : MonoBehaviour
 
     }
 
-    public void AnimationAttack(){
+    public void AnimationAttack()
+    {
         isAttacking = true;
-        animator.SetBool("isRolling", false);
+        //animator.Play("attack_side");
+        //animator.SetBool("isRolling", false);
         //animator.SetBool("isAttacking", true);
-        animator.SetTrigger("Attacking");
-        StartCoroutine(ResetAttack());
+        if (facingDown)
+        {
+            animator.Play("attack_down");
+        StartCoroutine(ResetAttack("attack_down"));
+        }
+        else if (facingUp)
+        {
+            animator.Play("attack_up");
+        StartCoroutine(ResetAttack("attack_up"));
+        }
+        else
+        {
+            animator.Play("attack_side");
+        StartCoroutine(ResetAttack("attack_side"));
+        }
+        // animator.SetTrigger("Attacking");
     }
 
-    public IEnumerator ResetAttack()
+    public IEnumerator ResetAttack(string name)
     {
         // Get the animation state info for the base layer (index 0)
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         // Wait for the animation to finish
         // Ensure you're waiting for the specific animation's length
-        while (!stateInfo.IsName("attack_side"))
+        while (!stateInfo.IsName(name))
         {
+        // Debug.Log("biba egorov");
             // Keep checking until the animation starts
             stateInfo = animator.GetCurrentAnimatorStateInfo(0);
             yield return null;
@@ -285,25 +333,29 @@ public class PlayerMoveComponent : MonoBehaviour
 
         // Wait until the animation has finished
         yield return new WaitForSeconds(stateInfo.length);
+        Debug.Log("aboba");
 
         //animator.SetBool("isAttacking", false);
         isAttacking = false;
         // Deactivate the GameObject after animation ends
     }
 
-    public void AnimationDeath(){
+    public void AnimationDeath()
+    {
         collider2D.enabled = false;
         isMove = false;
         moveDir = InputMove.None;
         // animator.SetBool("isDead", true);
-        animator.SetTrigger("Dying");
+        //animator.SetTrigger("Dying");
+
+        animator.Play("death");
         StartCoroutine(ResetDeath());
         //gameObject.SetActive(false);
 
-/// Text
+        /// Text
 
-    }   
-     public IEnumerator ResetDeath()
+    }
+    public IEnumerator ResetDeath()
     {
         isDying = true;
         // Get the animation state info for the base layer (index 0)
@@ -316,7 +368,7 @@ public class PlayerMoveComponent : MonoBehaviour
             // Keep checking until the animation starts
             stateInfo = animator.GetCurrentAnimatorStateInfo(0);
             yield return null;
-        // animator.SetBool("isDead", false);
+            // animator.SetBool("isDead", false);
         }
 
         // Wait until the animation has finished
